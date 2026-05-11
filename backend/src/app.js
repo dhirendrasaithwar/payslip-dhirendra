@@ -26,9 +26,15 @@ if (missing.length) {
 /* ───────────────────────────────
    CORS
 ─────────────────────────────── */
+const corsOrigins = [
+  "http://localhost:8080",
+  "http://localhost:5173",
+  ...(process.env.CORS_ORIGIN ? [process.env.CORS_ORIGIN] : []),
+];
+
 app.use(
   cors({
-    origin: ["http://localhost:8080", "http://localhost:5173"],
+    origin: corsOrigins,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"],
